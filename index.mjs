@@ -1,3 +1,4 @@
 #!/usr/bin/env node
+import {getSolutionForDate} from "./WORD_LIST.mjs";
 
-console.log("Finding today's offset");
+console.log(getSolutionForDate())
