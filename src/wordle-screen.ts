@@ -126,13 +126,13 @@ export function showWordleScreen(solution: string) {
         }
 
         function handleKeyPressed(key: string) {
-            if(isFinished)
-                return;
             if(key == '\u001B') {
                 process.stdout.removeListener('resize', render);
                 process.stdin.removeListener('data', handleKeyPressed);
                 resolve();
             }
+            if(isFinished)
+                return;
             if(validLetters.includes(key) && currentLine.length < 5) {
                 currentLine += key;
                 render();
