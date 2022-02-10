@@ -27,6 +27,7 @@ export function promptDatePicker() {
 
         function cleanup() {
             process.stdin.removeListener('data', handleKeyPressed);
+            process.stdout.removeListener('resize', render);
         }
 
         function validateDate() {
@@ -122,6 +123,7 @@ export function promptDatePicker() {
         }
 
         process.stdin.on('data', handleKeyPressed);
+        process.stdout.on('resize', render);
         render();
     });
 }

@@ -2,6 +2,7 @@ import {setupProcessHooks} from "./setup-process-hooks";
 import {promptCenteredActionDialog} from "./dialog";
 import {promptDatePicker} from "./date-picker";
 import {getSolutionForDate, SOLUTIONS} from "./WORD_LIST";
+import {showWordleScreen} from "./wordle-screen";
 
 main().then();
 
@@ -10,17 +11,17 @@ async function main() {
     await mainScreen();
 }
 
-function startWordle(solution: string) {
-    console.clear();
-    console.log(solution);
+async function startWordle(solution: string) {
+    await showWordleScreen(solution);
+    await mainScreen();
 }
 
 function startTodaysWordle() {
-    startWordle(getSolutionForDate());
+    return startWordle(getSolutionForDate());
 }
 
 function startRandomWordle() {
-    startWordle(SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)]);
+    return startWordle(SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)]);
 }
 
 async function showDateChooser(): Promise<void> {
@@ -33,7 +34,7 @@ async function showDateChooser(): Promise<void> {
             action: showDateChooser
         });
     }
-    startWordle(solutionForDate);
+    return startWordle(solutionForDate);
 }
 
 function exit() {
