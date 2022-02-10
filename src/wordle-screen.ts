@@ -63,7 +63,15 @@ export function showWordleScreen(solution: string) {
 
         function formatWord(str: string) {
             return Array.from(str)
-                .map(c => colorLetter(c, false))
+                .map((c, i) => {
+                    if(str[i] === c) {
+                        return chalk.green(c);
+                    }
+                    if(str.includes(c)) {
+                        return chalk.yellow(c);
+                    }
+                    return c;
+                })
                 .join("");
         }
 
@@ -79,7 +87,7 @@ export function showWordleScreen(solution: string) {
         let showError = false;
         let errorText = "Not on Wordlist";
 
-        function colorLetter(letter: string, grayInvalidCharacters: boolean = true) {
+        function colorLetter(letter: string) {
             switch (letterPosition[letter]) {
                 case undefined:
                     return letter;
@@ -88,7 +96,7 @@ export function showWordleScreen(solution: string) {
                 case LetterStatus.INCORRECT_POSITION:
                     return chalk.yellow(letter);
                 case LetterStatus.NOT_IN_WORD:
-                    return grayInvalidCharacters ? chalk.gray(letter) : letter;
+                    return chalk.gray(letter);
             }
         }
 
