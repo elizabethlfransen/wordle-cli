@@ -12976,11 +12976,11 @@ export const SOLUTIONS = [
 ];
 export const DATE_OFFSET = new Date(2021, 5, 19);
 
-export function getSolutionForDate(date = new Date()) {
+export function getSolutionForDate(date: Date = new Date()) {
   let index = getDateDiffInDays(date, DATE_OFFSET);
   return SOLUTIONS[index];
 }
 
-function getDateDiffInDays(a, b) {
+function getDateDiffInDays(a: Date, b: Date) {
   return Math.floor((a.getTime() - b.getTime()) / (1000 * 3600 * 24));
 }
