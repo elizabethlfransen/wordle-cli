@@ -64,7 +64,7 @@ export function showWordleScreen(solution: string) {
         function formatWord(str: string) {
             return Array.from(str)
                 .map((c, i) => {
-                    if(str[i] === c) {
+                    if(solution[i] === c) {
                         return chalk.green(c);
                     }
                     if(str.includes(c)) {
