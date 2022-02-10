@@ -100,6 +100,7 @@ function renderPromptCentered(
             options.join("\n"),
             {
                 title: chalk.green(title),
+                titleAlignment: "center",
                 borderStyle: 'round',
                 padding: {
                     top: 0,

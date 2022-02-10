@@ -1,25 +1,39 @@
 import {setupProcessHooks} from "./setup-process-hooks";
 import {promptCenteredActionDialog} from "./dialog";
+import {promptDatePicker} from "./date-picker";
+import {getSolutionForDate, SOLUTIONS} from "./WORD_LIST";
 
 main().then();
 
 async function main() {
     setupProcessHooks();
-    let result = await mainScreen();
+    await mainScreen();
+}
+
+function startWordle(solution: string) {
     console.clear();
-    console.log(result);
+    console.log(solution);
 }
 
 function startTodaysWordle() {
-
+    startWordle(getSolutionForDate());
 }
 
 function startRandomWordle() {
-
+    startWordle(SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)]);
 }
 
-function showDateChooser() {
-
+async function showDateChooser(): Promise<void> {
+    let result = await promptDatePicker();
+    if(result == null) return await mainScreen();
+    let solutionForDate = getSolutionForDate(result);
+    if(solutionForDate == null) {
+        return await promptCenteredActionDialog("Invalid Date", {
+            text: "Ok",
+            action: showDateChooser
+        });
+    }
+    startWordle(solutionForDate);
 }
 
 function exit() {
