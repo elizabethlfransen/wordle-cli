@@ -67,7 +67,7 @@ export function showWordleScreen(solution: string) {
                     if(solution[i] === c) {
                         return chalk.green(c);
                     }
-                    if(str.includes(c)) {
+                    if(solution.includes(c)) {
                         return chalk.yellow(c);
                     }
                     return c;
